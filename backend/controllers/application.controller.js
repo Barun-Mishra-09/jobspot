@@ -3,7 +3,7 @@ import { Job } from "../models/job.model.js";
 
 export const jobApply = async (req, res) => {
   try {
-    const userId = req.id; // loggedIn userId
+    const userId = req.id; 
     const jobId = req.params.id;
 
     if (!jobId) {
@@ -13,7 +13,7 @@ export const jobApply = async (req, res) => {
       });
     }
 
-    // check if the user already applied for the job
+   
     const alreadyApplied = await Application.findOne({
       job: jobId,
       applicant: userId,
@@ -26,7 +26,7 @@ export const jobApply = async (req, res) => {
       });
     }
 
-    // check if the jobs existed or not
+    
     const job = await Job.findById(jobId);
     if (!job) {
       return res.status(404).json({
@@ -35,13 +35,13 @@ export const jobApply = async (req, res) => {
       });
     }
 
-    // Create a new Application for the new applicant
+    
     const newApplication = await Application.create({
       job: jobId,
       applicant: userId,
     });
 
-    // job mai application ki id daalna hai
+   
     job.application.push(newApplication._id);
     await job.save();
 
@@ -56,9 +56,9 @@ export const jobApply = async (req, res) => {
 
 export const getAppliedJobs = async (req, res) => {
   try {
-    const userId = req.id; // loggedIn userid
+    const userId = req.id; 
 
-    // .sort({createdAt: -1}) iska jo chahiye wo sorted order mai ho accending order mai
+    
 
     const application = await Application.find({ applicant: userId })
       .sort({ createdAt: -1 })
@@ -87,7 +87,7 @@ export const getAppliedJobs = async (req, res) => {
   }
 };
 
-// admin dekhega kitna user ne apply kiya hai
+
 export const getApplicants = async (req, res) => {
   try {
     const jobId = req.params.id;
@@ -127,7 +127,7 @@ export const updateStatus = async (req, res) => {
       });
     }
 
-    // find the application by applicationId
+   
     const application = await Application.findOne({ _id: applicationId });
     if (!application) {
       return res.status(404).json({
@@ -136,7 +136,7 @@ export const updateStatus = async (req, res) => {
       });
     }
 
-    // update the status
+   
     application.status = status;
     await application.save();
 
