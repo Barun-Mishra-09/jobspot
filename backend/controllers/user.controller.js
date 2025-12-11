@@ -7,7 +7,7 @@ import cloudinary from "../utils/cloudinary.js";
 import path from "path";
 import axios from "axios";
 
-// for googleLogin
+
 import oauth2client from "../utils/googleConfig.js";
 
 export const Register = async (req, res) => {
@@ -58,7 +58,7 @@ export const Register = async (req, res) => {
         success: false,
       });
     }
-    // const file = req.file;
+ 
 
     const user = await User.create({
       fullname,
@@ -71,7 +71,7 @@ export const Register = async (req, res) => {
       },
     });
 
-    // Generate JWT token
+ 
     const tokenData = {
       userId: user._id,
     };
@@ -131,7 +131,7 @@ export const Login = async (req, res) => {
       });
     }
 
-    // Additional check for this project as role like as the student can't loggedIn recruited role
+   
     if (role !== existedUser.role) {
       return res.status(400).json({
         message:
@@ -140,7 +140,7 @@ export const Login = async (req, res) => {
       });
     }
 
-    // now for the token
+  
     const tokenData = {
       userId: existedUser._id,
     };
@@ -186,7 +186,7 @@ export const Logout = async (req, res) => {
   }
 };
 
-// updateProfile logic jisme jo hmlog ko update karna hai uska logic and "Cloudinary isme use hoga"
+
 export const updateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
@@ -273,13 +273,13 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-// for saving jobs we just make a self controller like savedJobs
+
 export const savedAllJobs = async (req, res) => {
   try {
     const loggedInUserId = req.id;
     const jobId = req.params.id;
 
-    // ✅ Check if jobId is a valid MongoDB ObjectId
+    
     if (!mongoose.Types.ObjectId.isValid(jobId)) {
       return res.status(400).json({
         message: "Invalid Job ID",
@@ -296,8 +296,7 @@ export const savedAllJobs = async (req, res) => {
       });
     }
 
-    // logic for the savedJobs
-    // User ke savedJobs mai include hai jobId to remove karo bookmarks se
+   
     if (user.savedJobs.includes(jobId)) {
       await User.findByIdAndUpdate(loggedInUserId, {
         $pull: { savedJobs: jobId },
@@ -307,7 +306,7 @@ export const savedAllJobs = async (req, res) => {
         success: true,
       });
     } else {
-      // save karo job ko
+      
       await User.findByIdAndUpdate(loggedInUserId, {
         $push: { savedJobs: jobId },
       });
@@ -321,7 +320,7 @@ export const savedAllJobs = async (req, res) => {
   }
 };
 
-// For getting all the saved Jobs
+
 export const getAllSavedJobs = async (req, res) => {
   try {
     const loggedInUserId = req.id;
@@ -330,7 +329,7 @@ export const getAllSavedJobs = async (req, res) => {
       path: "savedJobs",
       select: "title description position jobType salary createdAt company",
       populate: { path: "company", select: "name location logo" },
-    }); // use populate to get job details
+    }); 
 
     if (!user) {
       return res.status(404).json({
@@ -339,7 +338,7 @@ export const getAllSavedJobs = async (req, res) => {
       });
     }
 
-    // if all true then return success with message
+   
     return res.status(200).json({
       message: "Saved jobs retrieved successfully",
       success: true,
@@ -350,7 +349,6 @@ export const getAllSavedJobs = async (req, res) => {
   }
 };
 
-// create a new function for googleLogin
 
 export const googleLogin = async (req, res) => {
   try {
@@ -360,7 +358,7 @@ export const googleLogin = async (req, res) => {
 
     const redirectUri = process.env.GOOGLE_REDIRECT_URI || "postmessage";
 
-    // Step 1: Exchange code for tokens (must be x-www-form-urlencoded)
+    
     const tokenParams = new URLSearchParams({
       code,
       client_id: process.env.GOOGLE_CLIENT_ID,
@@ -381,7 +379,7 @@ export const googleLogin = async (req, res) => {
 
     const { access_token, id_token } = tokenData;
 
-    // Step 2: Fetch user info from Google
+    
     const { data: googleUser } = await axios.get(
       "https://www.googleapis.com/oauth2/v3/userinfo",
       {
@@ -399,9 +397,9 @@ export const googleLogin = async (req, res) => {
       user = await User.create({
         fullname: googleUser.name,
         email: googleUser.email,
-        password: "google-signin", // dummy
-        phoneNumber: 1234567890, // temporary required dummy number
-        role: "student", // must be lowercase as per schema
+        password: "google-signin", 
+        phoneNumber: 1234567890, 
+        role: "student", 
         profile: {
           profilePhoto: googleUser.picture,
         },
@@ -417,7 +415,7 @@ export const googleLogin = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "Lax",
-        maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
+        maxAge: 1 * 24 * 60 * 60 * 1000, 
       })
       .status(200)
       .json({
