@@ -28,7 +28,6 @@ import TitleManager from "./TitleManager";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 // import GoogleLogin from "./components/auth/GoogleLogin";
 
-// ✅ Common layout wrapper — har route ke andar TitleManager inject karega
 const Layout = ({ children }) => {
   return (
     <>
