@@ -1,4 +1,3 @@
-// components/AboutSection.jsx
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import {
@@ -8,7 +7,7 @@ import {
   FaEnvelope,
   FaDownload,
 } from "react-icons/fa";
-import Profile_Image from "./Profile_Image.jpg"; // Ensure this image is in your src folder or adjust path
+import Profile_Image from "./Profile_Image.jpg"; 
 
 const About = () => {
   return (
@@ -20,7 +19,7 @@ const About = () => {
         viewport={{ once: true }}
         className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
       >
-        {/* Left Column */}
+      
         <div className="text-center md:text-left">
           <motion.img
             src={Profile_Image}
@@ -57,7 +56,7 @@ const About = () => {
             and make opportunities more accessible.
           </p>
 
-          {/* Contact Buttons */}
+        
           <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-6">
             <a
               href="tel:+916205001632"
@@ -74,7 +73,7 @@ const About = () => {
               <FaEnvelope /> Message
             </a>
 
-            {/* 👇 Resume Download Button */}
+          
             <a
               href="/resume.pdf"
               download="Barun_Kumar_Mishra_Resume.pdf"
@@ -84,7 +83,7 @@ const About = () => {
             </a>
           </div>
 
-          {/* Social Links */}
+         
           <div className="flex gap-6 justify-center md:justify-start">
             <a
               href="https://github.com/Barun-Mishra-09"
@@ -105,7 +104,7 @@ const About = () => {
           </div>
         </div>
 
-        {/* Right Column: Skills */}
+       
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
