@@ -1,4 +1,3 @@
-// import React from "react";
 import { motion } from "framer-motion";
 import {
   FaEnvelope,
@@ -8,14 +7,14 @@ import {
   FaGithub,
 } from "react-icons/fa";
 
-// for showing contact us dynamically
+
 import { useState } from "react";
 import axios from "axios";
 import { CONTACT_API_END_POINT } from "../utils/constant";
 import { toast } from "sonner";
 
 const ContactUs = () => {
-  // let's build logic for the contact-us form
+ 
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -36,7 +35,7 @@ const ContactUs = () => {
 
       toast.success(res?.data?.message);
 
-      // reset form
+     
       setForm({ name: "", email: "", message: "" });
     } catch (err) {
       toast.error(err.response?.data?.message || "Error sending message");
@@ -80,7 +79,7 @@ const ContactUs = () => {
               </span>
             </div>
 
-            {/* Social Links */}
+           
             <div className="flex gap-6 mt-6">
               <a
                 href="https://www.linkedin.com/in/barun-kumar-mishra-bba651368/"
@@ -102,7 +101,7 @@ const ContactUs = () => {
           </div>
         </div>
 
-        {/* Right Section: Form */}
+        
         <motion.form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, x: 40 }}
