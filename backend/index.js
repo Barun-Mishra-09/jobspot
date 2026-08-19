@@ -30,7 +30,7 @@ const corsOptions = {
   origin:
     process.env.CLIENT_URL ||
     "http://localhost:5173" ||
-    "https://jobspot-jobsearch.onrender.com/login",
+    "https://jobspot-om79.onrender.com/login",
   credentials: true,
 };
 app.use(cors(corsOptions));
