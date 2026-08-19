@@ -1,8 +1,8 @@
-export const USER_API_END_POINT = "https://jobspot-om79.onrender.com/login/api/v1/user";
-export const JOB_API_END_POINT = "https://jobspot-om79.onrender.com/login/api/v1/job";
+export const USER_API_END_POINT = "https://jobspot-om79.onrender.com/api/v1/user";
+export const JOB_API_END_POINT = "https://jobspot-om79.onrender.com/api/v1/job";
 export const APPLICATION_API_END_POINT =
-  "https://jobspot-om79.onrender.com/login/api/v1/application";
-export const COMPANY_API_END_POINT = "https://jobspot-om79.onrender.com/login/api/v1/company";
+  "https://jobspot-om79.onrender.com/api/v1/application";
+export const COMPANY_API_END_POINT = "https://jobspot-om79.onrender.com/api/v1/company";
 
 // for contact us page
-export const CONTACT_API_END_POINT = "https://jobspot-om79.onrender.com/login/api/v1/contact";
+export const CONTACT_API_END_POINT = "https://jobspot-om79.onrender.com/api/v1/contact";
